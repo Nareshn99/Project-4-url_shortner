@@ -1,23 +1,22 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const route = require('./routes/route')
-const app = express();
+const express = require("express")
+const route = require("./routes/route")
+const mongoose = require("mongoose")
+const app = express()
+const cors = require("cors")
 
 
-app.use(express.json());
+app.use(express.json())
+app.use(cors())
 
-mongoose.connect("mongodb+srv://Priyanka19:G8reXRlHUbBX65ev@plutonium01.9fxu8wj.mongodb.net/group59Database", {
-  useNewUrlParser: true
+
+mongoose.connect("mongodb+srv://stuti3007:w14E1dmx6wAE1h7i@cluster0.rrvbnsb.mongodb.net/url-shortner",
+{useNewUrlParser:true}
+)
+.then(()=>console.log("mongoose connected successfully"))
+.catch((err)=>err)
+
+app.use("/",route)
+
+app.listen(process.env.PORT||3001,function(){
+    console.log("express is running port" + (process.env.PORT||3001) )
 })
-  .then(() => console.log("mongoDB is connected .........."))
-  .catch((err) => console.log(err))
-
-app.use('/', route)
-
-
-
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Express is running on ${PORT}`)
-})
-

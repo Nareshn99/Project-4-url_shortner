@@ -1,21 +1,12 @@
-const express=require('express');
-const router=express.Router();
-const urlController=require('../controllers/urlController')
+const express = require("express")
+const route = express.Router()
+const{urlcreation,geturl} = require("../controllers/urlController")
 
-router.get('/test-api',(req,res)=>{
-    res.send("API is runiggggg")
+route.post("/url/shorten",urlcreation)
+route.get("/:urlCode",geturl)
+route.all("/*",function(req,res){
+    return res.status(400).send({status:false,message:"path not found"})
 })
 
-router.post('/url/shorten',urlController.createUrl)
-router.get('/:urlCode',urlController.findUrl)
 
-
-//errorHandling for wrong address
-router.all("/**", function (_, res) {
-    res.status(400).send({
-        status: false,
-        msg: "The api you request is not available"
-    })
-})
-
-module.exports=router
+module.exports = route
