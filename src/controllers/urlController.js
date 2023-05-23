@@ -42,7 +42,7 @@ const urlcreation = async function (req, res) {
 
         const urlCode = shortid.generate().toLowerCase()
 
-        const baseUrl = "http://localhost:3001"
+        const baseUrl = "https://url-shortner-14k8.onrender.com"
 
         const obj = {
             longUrl: longUrl,
